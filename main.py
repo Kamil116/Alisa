@@ -96,8 +96,8 @@ def handle_dialog(res, req):
         if sessionStorage[user_id]['level'] == 1\
                 and sessionStorage[user_id]['true'] == 0\
                 and sessionStorage[user_id]['attempts'] == 0:
-            res['response']['card']['image_id'] = cities['москва']
             res['response']['card'] = {}
+            res['response']['card']['image_id'] = cities['москва']
             res['response']['card']['type'] = 'BigImage'
             res['response']['text'] = req
         elif sessionStorage[user_id]['level'] == 1 and sessionStorage[user_id]['true'] == 1 :
