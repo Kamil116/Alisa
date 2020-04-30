@@ -1,7 +1,6 @@
 from flask import Flask, request
 import logging
 import json
-import os
 import random
 
 app = Flask(__name__)
@@ -13,15 +12,12 @@ logging.basicConfig(level=logging.INFO)
 # которые мы записали в прошлом пункте.
 
 cities = {
-    'москва': ['1030494/172b28f45e6660180e70'],
-    'нью-йорк': ['1540737/4c0a41e67e2f2bd3bc20'],
-    'париж': ["1533899/283e55e768024752dc95"],
-    'милан': ['213044/66f1ac9423706a467910'],
-    'прага': ['213044/d5d01a000fd1915b9102'],
-    'москва-сити': ['213044/03744ac43b424a20f045'],
-    'ярославль': ['1533899/21664799215ca2c26258'],
-    'гренландия': ['213044/2460f8625f2e3bfd0e23'],
-    'река ли': ['1652229/838b283ac841a1b3c621'],
+    'москва': ['1540737/daa6e420d33102bf6947',
+               '213044/7df73ae4cc715175059e'],
+    'нью-йорк': ['1652229/728d5c86707054d4745f',
+                 '1030494/aca7ed7acefde2606bdc'],
+    'париж': ["1652229/f77136c2364eb90a3ea8",
+              '3450494/aca7ed7acefde22341bdc']
 }
 
 # создаем словарь, где для каждого пользователя
@@ -52,10 +48,7 @@ def handle_dialog(res, req):
         res['response']['text'] = 'Привет! Назови свое имя!'
         # создаем словарь в который в будущем положим имя пользователя
         sessionStorage[user_id] = {
-            'first_name': None,
-            'level': 1,
-            'true': 0,
-            'attempts': 0
+            'first_name': None
         }
         return
 
@@ -73,44 +66,36 @@ def handle_dialog(res, req):
         # И спрашиваем какой город он хочет увидеть.
         else:
             sessionStorage[user_id]['first_name'] = first_name
-            sessionStorage[user_id]['level'] = 1
-            sessionStorage[user_id]['true'] = 0
-            sessionStorage[user_id]['attempts'] = 0
             res['response'][
                 'text'] = 'Приятно познакомиться, ' \
                           + first_name.title() \
-                          + '. Я - Алиса. Сейчас мы сыграем в географический' \
-                            ' тест. На экране будет изображение' \
-                            ' географического объекта, а ты должен' \
-                            ' будешь угадать его название. Ты готов?'
+                          + '. Я - Алиса. Какой город хочешь увидеть?'
+            # получаем варианты buttons из ключей нашего словаря cities
             res['response']['buttons'] = [
                 {
-                    'title': 'Да!',
+                    'title': city.title(),
                     'hide': True
-                }
+                } for city in cities
             ]
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
     else:
-        if sessionStorage[user_id]['level'] == 1\
-                and sessionStorage[user_id]['true'] == 0\
-                and sessionStorage[user_id]['attempts'] == 0:
+        # ищем город в сообщение от пользователя
+        city = get_city(req)
+        # если этот город среди известных нам,
+        # то показываем его (выбираем одну из двух картинок случайно)
+        if city in cities:
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['title'] = 'Этот город я знаю.'
-            res['response']['card']['image_id'] = cities['москва']
+            res['response']['card']['image_id'] = random.choice(cities[city])
             res['response']['text'] = 'Я угадал!'
-        elif sessionStorage[user_id]['level'] == 1 and sessionStorage[user_id]['true'] == 1:
-            res['response']['card'] = {}
-            res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['title'] = 'Верный ответ!'
-            res['response']['card']['image_id'] = cities['москва']
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
             res['response']['text'] = \
-                'Не верный ответ. Идем дальше!'
+                'Первый раз слышу об этом городе. Попробуй еще разок!'
 
 
 def get_city(req):
@@ -135,5 +120,4 @@ def get_first_name(req):
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
