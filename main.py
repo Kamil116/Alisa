@@ -52,7 +52,10 @@ def handle_dialog(res, req):
         res['response']['text'] = 'Привет! Назови свое имя!'
         # создаем словарь в который в будущем положим имя пользователя
         sessionStorage[user_id] = {
-            'first_name': None
+            'first_name': None,
+            'level': 1,
+            'true': 0,
+            'attempts': 0
         }
         return
 
@@ -70,6 +73,9 @@ def handle_dialog(res, req):
         # И спрашиваем какой город он хочет увидеть.
         else:
             sessionStorage[user_id]['first_name'] = first_name
+            sessionStorage[user_id]['level'] = 1
+            sessionStorage[user_id]['true'] = 0
+            sessionStorage[user_id]['attempts'] = 0
             res['response'][
                 'text'] = 'Приятно познакомиться, ' \
                           + first_name.title() \
@@ -79,7 +85,7 @@ def handle_dialog(res, req):
                             ' будешь угадать его название. Ты готов?'
             res['response']['buttons'] = [
                 {
-                    'title': 'Да',
+                    'title': 'Да!',
                     'hide': True
                 }
             ]
@@ -87,15 +93,18 @@ def handle_dialog(res, req):
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
     else:
-        # ищем город в сообщение от пользователя
-        city = get_city(req)
-        # если этот город среди известных нам,
-        # то показываем его (выбираем одну из двух картинок случайно)
-        if city in cities:
+        if sessionStorage[user_id]['level'] == 1\
+                and sessionStorage[user_id]['true'] == 0\
+                and sessionStorage[user_id]['attempts'] == 0:
+            res['response']['card']['image_id'] = cities['москва']
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['text'] = req
+        elif sessionStorage[user_id]['level'] == 1 and sessionStorage[user_id]['true'] == 1 :
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['title'] = 'Верный ответ!'
-            res['response']['card']['image_id'] = random.choice(cities[city])
+            res['response']['card']['image_id'] = cities['москва']
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
