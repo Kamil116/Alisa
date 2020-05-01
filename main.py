@@ -135,28 +135,28 @@ def handle_dialog(res, req):
         if city in cities and city == 'москва' and sessionStorage[user_id]['true'] == 0:
             res['response']['text'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
-        if city in cities and city == 'нью-йорк' and sessionStorage[user_id]['true'] == 1:
+        elif city in cities and city == 'нью-йорк' and sessionStorage[user_id]['true'] == 1:
             res['response']['text'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
-        if city in cities and city == 'париж' and sessionStorage[user_id]['true'] == 2:
+        elif city in cities and city == 'париж' and sessionStorage[user_id]['true'] == 2:
             res['response']['text'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
-        if city in cities and city == 'милан' and sessionStorage[user_id]['true'] == 3:
+        elif city in cities and city == 'милан' and sessionStorage[user_id]['true'] == 3:
             res['response']['text'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
-        if city in cities and city == 'прага' and sessionStorage[user_id]['true'] == 4:
+        elif city in cities and city == 'прага' and sessionStorage[user_id]['true'] == 4:
             res['response']['text'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
-        if city in cities and city == 'москва-сити' and sessionStorage[user_id]['true'] == 5:
+        elif city in cities and city == 'москва-сити' and sessionStorage[user_id]['true'] == 5:
             res['response']['text'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
-        if city in cities and city == 'ярославль' and sessionStorage[user_id]['true'] == 6:
+        elif city in cities and city == 'ярославль' and sessionStorage[user_id]['true'] == 6:
             res['response']['text'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
-        if city in cities and city == 'гренландия' and sessionStorage[user_id]['true'] == 7:
+        elif city in cities and city == 'гренландия' and sessionStorage[user_id]['true'] == 7:
             res['response']['text'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
-        if city in cities and city == 'река ли' and sessionStorage[user_id]['true'] == 8:
+        elif city in cities and city == 'река ли' and sessionStorage[user_id]['true'] == 8:
             res['response']['text'] = 'Верно!'
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
