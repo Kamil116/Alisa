@@ -2,7 +2,6 @@ from flask import Flask, request
 import logging
 import json
 import os
-import random
 
 app = Flask(__name__)
 
@@ -13,15 +12,15 @@ logging.basicConfig(level=logging.INFO)
 # которые мы записали в прошлом пункте.
 
 cities = {
-    'москва': ['1030494/172b28f45e6660180e70'],
-    'нью-йорк': ['1540737/4c0a41e67e2f2bd3bc20'],
-    'париж': ["1533899/283e55e768024752dc95"],
-    'милан': ['213044/66f1ac9423706a467910'],
-    'прага': ['213044/d5d01a000fd1915b9102'],
-    'москва-сити': ['213044/03744ac43b424a20f045'],
-    'ярославль': ['1533899/21664799215ca2c26258'],
-    'гренландия': ['213044/2460f8625f2e3bfd0e23'],
-    'река ли': ['1652229/838b283ac841a1b3c621'],
+    'москва': '1030494/172b28f45e6660180e70',
+    'нью-йорк': '1540737/4c0a41e67e2f2bd3bc20',
+    'париж': "1533899/283e55e768024752dc95",
+    'милан': '213044/66f1ac9423706a467910',
+    'прага': '213044/d5d01a000fd1915b9102',
+    'москва-сити': '213044/03744ac43b424a20f045',
+    'ярославль': '1533899/21664799215ca2c26258',
+    'гренландия': '213044/2460f8625f2e3bfd0e23',
+    'река ли': '1652229/838b283ac841a1b3c621',
 }
 
 # создаем словарь, где для каждого пользователя
@@ -98,16 +97,10 @@ def handle_dialog(res, req):
         # если этот город среди известных нам,
         # то показываем его (выбираем одну из двух картинок случайно)
         if city in cities:
-            for entity in req['request']['nlu']['entities']:
-                # если тип YANDEX.GEO то пытаемся получить город(city),
-                # если нет, то возвращаем None
-                if entity['type'] == 'YANDEX.GEO':
-                    # возвращаем None, если не нашли сущности с типом YANDEX.GEO
-                    city = entity['value'].get('city', None)
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['title'] = city
-            res['response']['card']['image_id'] = random.choice(cities[city])
+            res['response']['card']['image_id'] = cities[city]
             res['response']['text'] = city
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
