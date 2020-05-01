@@ -96,7 +96,7 @@ def handle_dialog(res, req):
         res['response']['card'] = {}
         res['response']['card']['type'] = 'BigImage'
         res['response']['card']['title'] = 'Этот город я знаю.'
-        res['response']['card']['image_id'] = random.choice(cities)
+        res['response']['card']['image_id'] = cities['москва']
         res['response']['text'] = 'Я угадал!'
 
 
