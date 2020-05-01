@@ -102,11 +102,7 @@ def handle_dialog(res, req):
         # если этот город среди известных нам,
         # то показываем его (выбираем одну из двух картинок случайно)
         if city in cities and city == 'москва':
-            res['response']['card'] = {}
-            res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['title'] = city
-            res['response']['card']['image_id'] = cities[city]
-            res['response']['text'] = city
+            res['response']['text'] = 'Верно!'
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
