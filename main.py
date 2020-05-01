@@ -93,27 +93,11 @@ def handle_dialog(res, req):
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
     else:
-        if sessionStorage[user_id]['level'] == 1\
-                and sessionStorage[user_id]['true'] == 0\
-                and sessionStorage[user_id]['attempts'] == 0:
-            res['response']['card'] = {}
-            res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['title'] = 'Этот город я знаю.'
-            res['response']['card']['image_id'] = random.choice(cities)
-            res['response']['text'] = 'Я угадал!'
-        elif sessionStorage[user_id]['level'] == 1 and sessionStorage[user_id]['true'] == 1:
-            res['response']['card'] = {}
-            res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['title'] = 'Верный ответ!'
-            res['response']['card']['image_id'] = cities['москва']
-        # если не нашел, то отвечает пользователю
-        # 'Первый раз слышу об этом городе.'
-        else:
-            res['response']['text'] = \
-                'Не верный ответ. Идем дальше!'
-    res['response']['text'] = sessionStorage
-    res['response']['text'] = res
-    res['response']['text'] = req
+        res['response']['card'] = {}
+        res['response']['card']['type'] = 'BigImage'
+        res['response']['card']['title'] = 'Этот город я знаю.'
+        res['response']['card']['image_id'] = random.choice(cities)
+        res['response']['text'] = 'Я угадал!'
 
 
 def get_city(req):
