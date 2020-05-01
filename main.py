@@ -92,7 +92,7 @@ def handle_dialog(res, req):
                     and sessionStorage[user_id]['attempts'] == 0:
                 res['response']['card'] = {}
                 res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['Москва']
+                res['response']['card']['image_id'] = cities['москва']
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
