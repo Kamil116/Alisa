@@ -13,8 +13,8 @@ logging.basicConfig(level=logging.INFO)
 
 cities = {
     'москва': '1030494/172b28f45e6660180e70',
-    'нью-йорк': '1540737/4c0a41e67e2f2bd3bc20',
-    'париж': "1533899/283e55e768024752dc95",
+    'нью-йорк': '1533899/283e55e768024752dc95',
+    'париж': "1540737/4c0a41e67e2f2bd3bc20",
     'милан': '213044/66f1ac9423706a467910',
     'прага': '213044/d5d01a000fd1915b9102',
     'москва-сити': '213044/03744ac43b424a20f045',
@@ -140,24 +140,45 @@ def handle_dialog(res, req):
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'нью-йорк' and sessionStorage[user_id]['true'] == 1:
             res['response']['text'] = 'Верно!'
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['card']['image_id'] = cities['париж']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'париж' and sessionStorage[user_id]['true'] == 2:
             res['response']['text'] = 'Верно!'
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['card']['image_id'] = cities['милан']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'милан' and sessionStorage[user_id]['true'] == 3:
             res['response']['text'] = 'Верно!'
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['card']['image_id'] = cities['прага']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'прага' and sessionStorage[user_id]['true'] == 4:
             res['response']['text'] = 'Верно!'
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['card']['image_id'] = cities['москва-сити']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'москва-сити' and sessionStorage[user_id]['true'] == 5:
             res['response']['text'] = 'Верно!'
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['card']['image_id'] = cities['ярославль']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'ярославль' and sessionStorage[user_id]['true'] == 6:
             res['response']['text'] = 'Верно!'
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['card']['image_id'] = cities['гренландия']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'гренландия' and sessionStorage[user_id]['true'] == 7:
             res['response']['text'] = 'Верно!'
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['card']['image_id'] = cities['река ли']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'река ли' and sessionStorage[user_id]['true'] == 8:
             res['response']['text'] = 'Верно!'
