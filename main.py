@@ -111,6 +111,9 @@ def handle_dialog(res, req):
         else:
             res['response']['text'] = \
                 'Не верный ответ. Идем дальше!'
+    res['response']['text'] = sessionStorage
+    res['response']['text'] = res
+    res['response']['text'] = req
 
 
 def get_city(req):
