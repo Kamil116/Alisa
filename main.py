@@ -20,7 +20,7 @@ cities = {
     'рига': '1521359/990ea96179316ea196e7',
     'ярославль': '1533899/21664799215ca2c26258',
     'дубай': '1533899/48c415d2bf1495af3f01',
-    'мекка': '1521359/a01129df468194629835',
+    'казань': '1533899/467828424886676bc86c',
 }
 
 # создаем словарь, где для каждого пользователя
@@ -178,9 +178,9 @@ def handle_dialog(res, req):
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['image_id'] = cities['мекка']
+            res['response']['card']['image_id'] = cities['казань']
             sessionStorage[user_id]['true'] += 1
-        elif city in cities and city == 'мекка' and sessionStorage[user_id]['true'] == 8:
+        elif city in cities and city == 'казань' and sessionStorage[user_id]['true'] == 8:
             res['response']['text'] = 'Верно!'
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
