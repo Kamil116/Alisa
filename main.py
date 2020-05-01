@@ -178,7 +178,7 @@ def handle_dialog(res, req):
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['image_id'] = cities['река ли']
+            res['response']['card']['image_id'] = cities['мекка']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'мекка' and sessionStorage[user_id]['true'] == 8:
             res['response']['text'] = 'Верно!'
