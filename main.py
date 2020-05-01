@@ -2,6 +2,7 @@ from flask import Flask, request
 import logging
 import json
 import os
+import random
 
 app = Flask(__name__)
 
@@ -103,12 +104,11 @@ def handle_dialog(res, req):
                 if entity['type'] == 'YANDEX.GEO':
                     # возвращаем None, если не нашли сущности с типом YANDEX.GEO
                     city = entity['value'].get('city', None)
-            # res['response']['text'] = city
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['title'] = city
-            res['response']['card']['image_id'] = cities['москва']
-            res['response']['text'] = 'Я угадал!'
+            res['response']['card']['image_id'] = random.choice(cities[city])
+            res['response']['text'] = city
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
