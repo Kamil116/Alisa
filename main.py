@@ -17,10 +17,10 @@ cities = {
     'париж': "1540737/4c0a41e67e2f2bd3bc20",
     'милан': '213044/66f1ac9423706a467910',
     'прага': '213044/d5d01a000fd1915b9102',
-    'москва-сити': '213044/03744ac43b424a20f045',
+    'рига': '1521359/990ea96179316ea196e7',
     'ярославль': '1533899/21664799215ca2c26258',
-    'гренландия': '213044/2460f8625f2e3bfd0e23',
-    'река ли': '1652229/838b283ac841a1b3c621',
+    'дубай': '1533899/48c415d2bf1495af3f01',
+    'мекка': '1521359/a01129df468194629835',
 }
 
 # создаем словарь, где для каждого пользователя
@@ -111,7 +111,7 @@ def handle_dialog(res, req):
             elif sessionStorage[user_id]['true'] == 5:
                 res['response']['card'] = {}
                 res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['москва-сити']
+                res['response']['card']['image_id'] = cities['рига']
             elif sessionStorage[user_id]['true'] == 6:
                 res['response']['card'] = {}
                 res['response']['card']['type'] = 'BigImage'
@@ -119,11 +119,11 @@ def handle_dialog(res, req):
             elif sessionStorage[user_id]['true'] == 7:
                 res['response']['card'] = {}
                 res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['гренландия']
+                res['response']['card']['image_id'] = cities['дубай']
             elif sessionStorage[user_id]['true'] == 8:
                 res['response']['card'] = {}
                 res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['река ли']
+                res['response']['card']['image_id'] = cities['мекка']
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
@@ -160,9 +160,9 @@ def handle_dialog(res, req):
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['image_id'] = cities['москва-сити']
+            res['response']['card']['image_id'] = cities['рига']
             sessionStorage[user_id]['true'] += 1
-        elif city in cities and city == 'москва-сити' and sessionStorage[user_id]['true'] == 5:
+        elif city in cities and city == 'рига' and sessionStorage[user_id]['true'] == 5:
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
@@ -172,15 +172,15 @@ def handle_dialog(res, req):
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['image_id'] = cities['гренландия']
+            res['response']['card']['image_id'] = cities['дубай']
             sessionStorage[user_id]['true'] += 1
-        elif city in cities and city == 'гренландия' and sessionStorage[user_id]['true'] == 7:
+        elif city in cities and city == 'дубай' and sessionStorage[user_id]['true'] == 7:
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['река ли']
             sessionStorage[user_id]['true'] += 1
-        elif city in cities and city == 'река ли' and sessionStorage[user_id]['true'] == 8:
+        elif city in cities and city == 'мекка' and sessionStorage[user_id]['true'] == 8:
             res['response']['text'] = 'Верно!'
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
