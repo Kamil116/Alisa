@@ -78,16 +78,21 @@ def handle_dialog(res, req):
             res['response'][
                 'text'] = 'Приятно познакомиться, ' \
                           + first_name.title() \
-                          + '. Я - Алиса. Сейчас мы сыграем в географический' \
+                          + '. Я Алиса. Сейчас мы сыграем в географический' \
                             ' тест. На экране будет изображение' \
                             ' географического объекта, а ты должен' \
-                            ' будешь угадать его название. Ты готов?'
-            res['response']['buttons'] = [
+                            ' будешь угадать его название.'
+            """res['response']['buttons'] = [
                 {
-                    'title': 'Да!',
+                    'title': 'Старт!',
                     'hide': True
                 }
-            ]
+            ]"""
+            if sessionStorage[user_id]['level'] == 1 and sessionStorage[user_id]['true'] == 0 \
+                    and sessionStorage[user_id]['attempts'] == 0:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['Москва']
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
@@ -96,7 +101,7 @@ def handle_dialog(res, req):
         city = get_city(req)
         # если этот город среди известных нам,
         # то показываем его (выбираем одну из двух картинок случайно)
-        if city in cities:
+        if city in cities and city == 'москва':
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['title'] = city
