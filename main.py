@@ -88,11 +88,42 @@ def handle_dialog(res, req):
                     'hide': True
                 }
             ]"""
-            if sessionStorage[user_id]['level'] == 1 and sessionStorage[user_id]['true'] == 0 \
-                    and sessionStorage[user_id]['attempts'] == 0:
+            if sessionStorage[user_id]['true'] == 0:
                 res['response']['card'] = {}
                 res['response']['card']['type'] = 'BigImage'
                 res['response']['card']['image_id'] = cities['москва']
+            elif sessionStorage[user_id]['true'] == 1:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['нью-йорк']
+            elif sessionStorage[user_id]['true'] == 2:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['париж']
+            elif sessionStorage[user_id]['true'] == 3:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['милан']
+            elif sessionStorage[user_id]['true'] == 4:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['прага']
+            elif sessionStorage[user_id]['true'] == 5:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['москва-сити']
+            elif sessionStorage[user_id]['true'] == 6:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['ярославль']
+            elif sessionStorage[user_id]['true'] == 7:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['гренландия']
+            elif sessionStorage[user_id]['true'] == 8:
+                res['response']['card'] = {}
+                res['response']['card']['type'] = 'BigImage'
+                res['response']['card']['image_id'] = cities['река ли']
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
@@ -101,13 +132,37 @@ def handle_dialog(res, req):
         city = get_city(req)
         # если этот город среди известных нам,
         # то показываем его (выбираем одну из двух картинок случайно)
-        if city in cities and city == 'москва':
+        if city in cities and city == 'москва' and sessionStorage[user_id]['true'] == 0:
+            res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        if city in cities and city == 'нью-йорк' and sessionStorage[user_id]['true'] == 1:
+            res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        if city in cities and city == 'париж' and sessionStorage[user_id]['true'] == 2:
+            res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        if city in cities and city == 'милан' and sessionStorage[user_id]['true'] == 3:
+            res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        if city in cities and city == 'прага' and sessionStorage[user_id]['true'] == 4:
+            res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        if city in cities and city == 'москва-сити' and sessionStorage[user_id]['true'] == 5:
+            res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        if city in cities and city == 'ярославль' and sessionStorage[user_id]['true'] == 6:
+            res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        if city in cities and city == 'гренландия' and sessionStorage[user_id]['true'] == 7:
+            res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        if city in cities and city == 'река ли' and sessionStorage[user_id]['true'] == 8:
             res['response']['text'] = 'Верно!'
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
             res['response']['text'] = \
-                'Первый раз слышу об этом городе. Попробуй еще разок!'
+                'Не верно! Попробуй ещё раз.'
 
 
 def get_city(req):
