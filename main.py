@@ -46,7 +46,7 @@ def main():
 def handle_dialog(res, req):
     user_id = req['session']['user_id']
     suggests1 = ["Москва", "Шанхай", "Сидней"]
-    suggests2 = ["Таллин" "Нью-Йорк", "Вена"]
+    suggests2 = ["Таллин", "Нью-Йорк", "Вена"]
     suggests3 = ["Париж", "Ванкувер", "Мюнхен"]
     suggests4 = ["Милан", "Копенгаген", "Дюссельдорф"]
     suggests5 = ["Копенгаген", "Франкфурт-на-Майне", "Прага"]
@@ -136,7 +136,7 @@ def handle_dialog(res, req):
                 {
                     'title': suggest,
                     'hide': True
-                } for suggest in suggests3
+                } for sugget in suggests3
             ]
         elif city in cities and city == 'париж' and sessionStorage[user_id]['true'] == 2:
             res['response']['text'] = 'Верно!'
@@ -220,6 +220,69 @@ def handle_dialog(res, req):
         else:
             res['response']['text'] = \
                 'Не верно! Попробуй ещё раз.'
+            if sessionStorage[user_id]['true'] == 0:
+                res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests1
+                ]
+            elif sessionStorage[user_id]['true'] == 1:
+                res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests2
+                ]
+            elif sessionStorage[user_id]['true'] == 2:
+                res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests3
+                ]
+            elif sessionStorage[user_id]['true'] == 3:
+                res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests4
+                ]
+            elif sessionStorage[user_id]['true'] == 4:res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests5
+                ]
+            elif sessionStorage[user_id]['true'] == 5:
+                res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests6
+                ]
+            elif sessionStorage[user_id]['true'] == 6:
+                res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests7
+                ]
+            elif sessionStorage[user_id]['true'] == 7:
+                res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests8
+                ]
+            elif sessionStorage[user_id]['true'] == 8:
+                res['response']['buttons'] = [
+                    {
+                        'title': suggest,
+                        'hide': True
+                    } for suggest in suggests9
+                ]
+
 
 
 def get_city(req):
