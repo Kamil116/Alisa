@@ -136,7 +136,7 @@ def handle_dialog(res, req):
                 {
                     'title': suggest,
                     'hide': True
-                } for sugget in suggests3
+                } for suggest in suggests3
             ]
         elif city in cities and city == 'париж' and sessionStorage[user_id]['true'] == 2:
             res['response']['text'] = 'Верно!'
