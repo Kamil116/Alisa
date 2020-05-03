@@ -143,6 +143,7 @@ def handle_dialog(res, req):
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['москва']
+            res['response']['text'] = 'Первый город!'
             res['response']['buttons'] = [
                 {
                     'title': suggest,
