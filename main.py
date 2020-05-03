@@ -150,6 +150,7 @@ def handle_dialog(res, req):
                     'hide': True
                 } for suggest in suggests1
             ]
+            sessionStorage[user_id]['attempts'] += 1
         elif city in cities and city == 'москва' and sessionStorage[user_id]['true'] == 0:
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
