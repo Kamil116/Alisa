@@ -45,7 +45,7 @@ def main():
 
 def handle_dialog(res, req):
     user_id = req['session']['user_id']
-
+    suggests1 = ["Москва", "Шанхай", "Сидней"]
     # если пользователь новый, то просим его представиться.
     if req['session']['new']:
         res['response']['text'] = 'Привет! Назови свое имя!'
@@ -143,7 +143,7 @@ def handle_dialog(res, req):
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['москва']
-            res['response']['buttons'] = sessionStorage[user_id]['suggests1']
+            res['response']['buttons'] = suggests1
         elif city in cities and city == 'москва' and sessionStorage[user_id]['true'] == 0:
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
