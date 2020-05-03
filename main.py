@@ -218,7 +218,7 @@ def handle_dialog(res, req):
             ]
         elif city in cities and city == 'казань' and sessionStorage[user_id]['true'] == 8:
             res['response']['text'] = 'Верный ответ! Вам понадобилось' + \
-                                      sessionStorage[user_id]['attempts'] \
+                                      str(sessionStorage[user_id]['attempts']) \
                                       + 'попыток, чтобы отгадать 9 ' \
                                         'городов. Ждём вас снова!'
         # если не нашел, то отвечает пользователю
