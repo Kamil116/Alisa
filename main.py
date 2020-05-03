@@ -52,7 +52,7 @@ def handle_dialog(res, req):
     suggests5 = ["Копенгаген", "Франкфурт-на-Майне", "Прага"]
     suggests6 = ["Рига", "Женева", "Рио-де-Жанейро"]
     suggests7 = ["Стамбул", "Рим", "Ярославль"]
-    suggests8 = ["Дубай", "Амстердам",  "Токио"]
+    suggests8 = ["Дубай", "Амстердам", "Токио"]
     suggests9 = ["Мумбаи", "Сеул", "Казань"]
     # если пользователь новый, то просим его представиться.
     if req['session']['new']:
@@ -89,11 +89,7 @@ def handle_dialog(res, req):
                           + '. Я Алиса. Сейчас мы сыграем в географический' \
                             ' тест. На экране будет изображение' \
                             ' известного города, а ты должен' \
-                            ' будешь угадать его название.'
-
-            """res['response']['card'] = {}
-            res['response']['card']['type'] = 'BigImage'
-            res['response']['card']['image_id'] = cities['москва']"""
+                            ' будешь угадать его название. Ты готов?'
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
@@ -106,7 +102,7 @@ def handle_dialog(res, req):
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['москва']
-            res['response']['text'] = 'Первый город!'
+            res['response']['card']['title'] = 'Первый город! Поехали!'
             res['response']['buttons'] = [
                 {
                     'title': suggest,
@@ -115,10 +111,10 @@ def handle_dialog(res, req):
             ]
             sessionStorage[user_id]['attempts'] += 1
         elif city in cities and city == 'москва' and sessionStorage[user_id]['true'] == 0:
-            res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['нью-йорк']
+            res['response']['card']['title'] = 'Первый правильный ответ!'
             sessionStorage[user_id]['true'] += 1
             res['response']['buttons'] = [
                 {
@@ -127,10 +123,10 @@ def handle_dialog(res, req):
                 } for suggest in suggests2
             ]
         elif city in cities and city == 'нью-йорк' and sessionStorage[user_id]['true'] == 1:
-            res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['париж']
+            res['response']['card']['title'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
             res['response']['buttons'] = [
                 {
@@ -139,10 +135,10 @@ def handle_dialog(res, req):
                 } for suggest in suggests3
             ]
         elif city in cities and city == 'париж' and sessionStorage[user_id]['true'] == 2:
-            res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['милан']
+            res['response']['card']['title'] = 'Супер!'
             sessionStorage[user_id]['true'] += 1
             res['response']['buttons'] = [
                 {
@@ -151,10 +147,10 @@ def handle_dialog(res, req):
                 } for suggest in suggests4
             ]
         elif city in cities and city == 'милан' and sessionStorage[user_id]['true'] == 3:
-            res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['прага']
+            res['response']['card']['title'] = 'Идём дальше!'
             sessionStorage[user_id]['true'] += 1
             res['response']['buttons'] = [
                 {
@@ -167,6 +163,7 @@ def handle_dialog(res, req):
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['рига']
+            res['response']['card']['title'] = 'Великолепно!'
             sessionStorage[user_id]['true'] += 1
             res['response']['buttons'] = [
                 {
@@ -175,10 +172,10 @@ def handle_dialog(res, req):
                 } for suggest in suggests6
             ]
         elif city in cities and city == 'рига' and sessionStorage[user_id]['true'] == 5:
-            res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['ярославль']
+            res['response']['card']['title'] = 'Поразительно!'
             sessionStorage[user_id]['true'] += 1
             res['response']['buttons'] = [
                 {
@@ -187,10 +184,10 @@ def handle_dialog(res, req):
                 } for suggest in suggests7
             ]
         elif city in cities and city == 'ярославль' and sessionStorage[user_id]['true'] == 6:
-            res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['дубай']
+            res['response']['card']['title'] = 'Верно!'
             sessionStorage[user_id]['true'] += 1
             res['response']['buttons'] = [
                 {
@@ -199,10 +196,10 @@ def handle_dialog(res, req):
                 } for suggest in suggests8
             ]
         elif city in cities and city == 'дубай' and sessionStorage[user_id]['true'] == 7:
-            res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['казань']
+            res['response']['card']['title'] = 'Отлично!'
             sessionStorage[user_id]['true'] += 1
             res['response']['buttons'] = [
                 {
@@ -211,10 +208,13 @@ def handle_dialog(res, req):
                 } for suggest in suggests9
             ]
         elif city in cities and city == 'казань' and sessionStorage[user_id]['true'] == 8:
-            res['response']['text'] = 'Верно!'
+            res['response']['text'] = 'Верный ответ!'
             sessionStorage[user_id]['true'] += 1
         elif sessionStorage[user_id]['true'] == 9:
-            res['response']['text'] = 'Верно! Вы потратили' + sessionStorage[user_id]['attempts']
+            res['response']['text'] = 'Вам понадобилось' \
+                                      + sessionStorage[user_id]['attempts'] \
+                                      + 'попыток, чтобы отгадать 9 городов.' \
+                                        ' Ждём вас снова!'
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
@@ -248,7 +248,8 @@ def handle_dialog(res, req):
                         'hide': True
                     } for suggest in suggests4
                 ]
-            elif sessionStorage[user_id]['true'] == 4:res['response']['buttons'] = [
+            elif sessionStorage[user_id]['true'] == 4:
+                res['response']['buttons'] = [
                     {
                         'title': suggest,
                         'hide': True
@@ -282,7 +283,6 @@ def handle_dialog(res, req):
                         'hide': True
                     } for suggest in suggests9
                 ]
-
 
 
 def get_city(req):
