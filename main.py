@@ -217,10 +217,10 @@ def handle_dialog(res, req):
                 } for suggest in suggests9
             ]
         elif city in cities and city == 'казань' and sessionStorage[user_id]['true'] == 8:
-            res['response']['text'] = 'Верный ответ!' + 'Вам понадобилось' \
-                                      + sessionStorage[user_id]['attempts'] \
-                                      + 'попыток, чтобы отгадать 9 городов.' \
-                                        ' Ждём вас снова!'
+            res['response']['text'] = 'Верный ответ! Вам понадобилось' + \
+                                      sessionStorage[user_id]['attempts'] \
+                                      + 'попыток, чтобы отгадать 9 ' \
+                                        'городов. Ждём вас снова!'
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
