@@ -222,11 +222,11 @@ def handle_dialog(res, req):
                                           ' Вы ни разу не ошиблись!' \
                                           ' Ждём вас снова.'
             else:
-                comment = morph.parse('ошибок')[0]
+                comment = morph.parse('ошибка')[0]
                 comment = comment.make_agree_with_number(sessionStorage[user_id]['wrongs']).word
-                res['response']['text'] = 'Вы совершили' \
+                res['response']['text'] = 'Вы совершили ' \
                                           + str(sessionStorage[user_id]
-                                                ['wrongs']) + comment \
+                                                ['wrongs']) + ' ' + comment \
                                           + 'Не расстраивайтесь, вы можете' \
                                             ' сыграть снова'
         # если не нашел, то отвечает пользователю
