@@ -224,11 +224,10 @@ def handle_dialog(res, req):
             else:
                 comment = morph.parse('ошибка')[0]
                 comment = comment.make_agree_with_number(sessionStorage[user_id]['wrongs']).word
-                res['response']['text'] = 'Вы совершили ' \
-                                          + str(sessionStorage[user_id]
-                                                ['wrongs']) + ' ' + comment \
-                                          + '. Не расстраивайтесь, вы можете' \
-                                            ' сыграть снова'
+                res['response']['text'] = str(sessionStorage[user_id]
+                                              ['wrongs']) + ' ' + comment \
+                                          + '. Не расстраивайтесь,' \
+                                            ' вы можете сыграть снова'
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
