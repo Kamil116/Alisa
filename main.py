@@ -88,42 +88,9 @@ def handle_dialog(res, req):
                     'hide': True
                 }
             ]"""
-            if sessionStorage[user_id]['true'] == 0:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['москва']
-            elif sessionStorage[user_id]['true'] == 1:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['нью-йорк']
-            elif sessionStorage[user_id]['true'] == 2:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['париж']
-            elif sessionStorage[user_id]['true'] == 3:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['милан']
-            elif sessionStorage[user_id]['true'] == 4:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['прага']
-            elif sessionStorage[user_id]['true'] == 5:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['рига']
-            elif sessionStorage[user_id]['true'] == 6:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['ярославль']
-            elif sessionStorage[user_id]['true'] == 7:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['дубай']
-            elif sessionStorage[user_id]['true'] == 8:
-                res['response']['card'] = {}
-                res['response']['card']['type'] = 'BigImage'
-                res['response']['card']['image_id'] = cities['мекка']
+            res['response']['card'] = {}
+            res['response']['card']['type'] = 'BigImage'
+            res['response']['card']['image_id'] = cities['москва']
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
     # что хочет увидеть.
@@ -133,12 +100,48 @@ def handle_dialog(res, req):
         # если этот город среди известных нам,
         # то показываем его (выбираем одну из двух картинок случайно)
         if city in cities and city == 'москва' and sessionStorage[user_id]['true'] == 0:
+            res['response']['buttons'] = [
+                {
+                    'title': 'Канберра',
+                    'hide': True
+                }
+            ]
+            res['response']['buttons'] = [
+                {
+                    'title': 'Москва',
+                    'hide': True
+                }
+            ]
+            res['response']['buttons'] = [
+                {
+                    'title': 'Париж',
+                    'hide': True
+                }
+            ]
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['нью-йорк']
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'нью-йорк' and sessionStorage[user_id]['true'] == 1:
+            res['response']['buttons'] = [
+                {
+                    'title': 'Нью-Йорк',
+                    'hide': True
+                }
+            ]
+            res['response']['buttons'] = [
+                {
+                    'title': 'Сидней',
+                    'hide': True
+                }
+            ]
+            res['response']['buttons'] = [
+                {
+                    'title': 'Шанхай',
+                    'hide': True
+                }
+            ]
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
@@ -182,6 +185,9 @@ def handle_dialog(res, req):
             sessionStorage[user_id]['true'] += 1
         elif city in cities and city == 'казань' and sessionStorage[user_id]['true'] == 8:
             res['response']['text'] = 'Верно!'
+            sessionStorage[user_id]['true'] += 1
+        elif sessionStorage[user_id]['true'] == 9:
+            res['response']['text'] = 'Верно! Вы потратили' + sessionStorage[user_id]['attempts']
         # если не нашел, то отвечает пользователю
         # 'Первый раз слышу об этом городе.'
         else:
