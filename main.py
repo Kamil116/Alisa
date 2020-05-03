@@ -143,7 +143,12 @@ def handle_dialog(res, req):
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
             res['response']['card']['image_id'] = cities['москва']
-            res['response']['buttons'] = suggests1
+            res['response']['buttons'] = [
+                {
+                    'title': suggest,
+                    'hide': True
+                } for suggest in suggests1
+            ]
         elif city in cities and city == 'москва' and sessionStorage[user_id]['true'] == 0:
             res['response']['text'] = 'Верно!'
             res['response']['card'] = {}
