@@ -10,8 +10,7 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
 # создаем словарь, в котором ключ — название города,
-# а значение — массив, где перечислены id картинок,
-# которые мы записали в прошлом пункте.
+# а значение — массив, где перечислены id картинок
 
 cities = {
     'москва': '1030494/172b28f45e6660180e70',
@@ -59,7 +58,6 @@ def handle_dialog(res, req):
     # если пользователь новый, то просим его представиться.
     if req['session']['new']:
         res['response']['text'] = 'Привет! Назовите свое имя!'
-        # создаем словарь в который в будущем положим имя пользователя
         sessionStorage[user_id] = {
             'first_name': None,
             'level': 1,
@@ -90,15 +88,12 @@ def handle_dialog(res, req):
                           + first_name.title() \
                           + '. Я Алиса. Сейчас мы сыграем в географический' \
                             ' тест. Вы готовы?'
-    # если мы знакомы с пользователем и он нам что-то написал,
-    # то это говорит о том, что он уже говорит о городе,
-    # что хочет увидеть.
     else:
         # ищем город в сообщение от пользователя
         city = get_city(req)
-        # если этот город среди известных нам,
-        # то показываем его (выбираем одну из двух картинок случайно)
-        if sessionStorage[user_id]['attempts'] == 0:
+        if sessionStorage[user_id]['true'] == 8:
+            res['response']['text'] = 'Игра окончена.'
+        elif sessionStorage[user_id]['attempts'] == 0:
             res['response']['text'] = ''
             res['response']['card'] = {}
             res['response']['card']['type'] = 'BigImage'
@@ -232,7 +227,7 @@ def handle_dialog(res, req):
         # 'Первый раз слышу об этом городе.'
         else:
             res['response']['text'] = \
-                'Не верно! Попробуй ещё раз.'
+                'Не верно! Попробуйте ещё раз.'
             sessionStorage[user_id]['wrongs'] += 1
             if sessionStorage[user_id]['true'] == 0:
                 res['response']['buttons'] = [
