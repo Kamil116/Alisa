@@ -62,7 +62,8 @@ def handle_dialog(res, req):
             'first_name': None,
             'level': 1,
             'true': 0,
-            'wrongs': 0
+            'wrongs': 0,
+            'end': False
         }
         return
 
@@ -91,7 +92,7 @@ def handle_dialog(res, req):
     else:
         # ищем город в сообщение от пользователя
         city = get_city(req)
-        if sessionStorage[user_id]['true'] == 8:
+        if sessionStorage[user_id]['end'] is True:
             res['response']['text'] = 'Игра окончена.'
         elif sessionStorage[user_id]['attempts'] == 0:
             res['response']['text'] = ''
@@ -212,6 +213,7 @@ def handle_dialog(res, req):
                 } for suggest in suggests9
             ]
         elif city in cities and city == 'казань' and sessionStorage[user_id]['true'] == 8:
+            sessionStorage[user_id]['end'] = True
             if sessionStorage[user_id]['wrongs'] == 0:
                 res['response']['text'] = 'Верный ответ! Поразительно!' \
                                           ' Вы ни разу не ошиблись!' \
